@@ -86,7 +86,7 @@ export default function TheAnthropicBet() {
 
       <SectionHeader tag="the-weapons-question" title="The Weapons Question" />
       <p>
-        As an ex-USAF, I want the best technology protecting this country. I believe in
+        As a USAF veteran, I want the best technology protecting this country. I believe in
         technological superiority as a strategic imperative. I&apos;ve served in a world where the
         quality of your tools determines who comes home.
       </p>
