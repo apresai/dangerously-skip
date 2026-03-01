@@ -12,4 +12,5 @@ clean:
 deploy: clean
 	npm install
 	npm run build
+	npx open-next build
 	cd cdk && npm install && npx cdk deploy --require-approval never

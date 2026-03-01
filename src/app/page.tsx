@@ -41,7 +41,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-lg md:text-xl text-gray-500 max-w-xl leading-relaxed mt-8">
-            We built safety checks for a reason. I turned mine off.
+            We built safety checks for a reason.
           </p>
         </div>
       </section>

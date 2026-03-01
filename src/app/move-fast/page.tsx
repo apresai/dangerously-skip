@@ -39,39 +39,43 @@ export default function MoveFast() {
         Here&apos;s a story about that speed.
       </p>
       <p>
-        Someone on the team used AI to draft an executive escalation. The ask: more support, customers
-        are in pain. The problem: the context was wrong. It mixed signals from another workstream.
+        Someone on my team used AI to summarize feedback from our team for an internal business
+        report. After ten years of writing these reports, trust me — I&apos;ll take the help. But the
+        AI mixed signals from another workstream into the summary, and what came out painted a
+        picture of customers in pain that didn&apos;t match reality.
       </p>
       <p>
-        At Amazon, &ldquo;customers in pain&rdquo; goes straight to the top. Fast. Leadership engaged. Resources
-        started mobilizing. We were heading down the path of solving a problem for a customer who
-        never reported one — about to manufacture a response to pain they never felt.
+        Amazon takes security seriously. Very seriously. And &ldquo;customers in pain&rdquo; gets attention
+        fast. Leadership engaged. Resources started mobilizing. We were heading down the path of
+        solving a problem for a customer who never reported one.
       </p>
       <p>
-        Then the correction: <em>Sorry, that wasn&apos;t accurate. No help is needed.</em>
+        Then the correction: <em>Sorry, that wasn&apos;t accurate. The summary was wrong.</em>
       </p>
       <p>
-        The customer never knew. It was entirely internal. An embarrassing email. A wasted cycle. A
-        few red faces in a meeting room. That&apos;s all it was.
+        The customer never knew. It was entirely internal — a simple business report with bad
+        context. A wasted cycle. A few red faces in a meeting room. That&apos;s all it was.
       </p>
       <p>
-        That time.
+        And that&apos;s exactly why the system works. Amazon&apos;s culture of escalation caught it.
+        Humans were in the loop. The process did what processes are supposed to do.
       </p>
 
-      <SectionHeader tag="the-near-miss" title="The Near-Miss" />
+      <SectionHeader tag="the-near-miss" title="The Lesson" />
       <p>
-        Think about what almost happened: a company known for customer obsession, mobilizing at
-        executive speed, about to deliver a solution to a problem that didn&apos;t exist — all because
-        AI-generated content was trusted without verification.
+        The story isn&apos;t that something went wrong — it&apos;s that the humans-in-the-loop system
+        worked. Amazon&apos;s process caught the error before it reached a customer. That&apos;s what
+        good organizational design looks like.
       </p>
       <p>
-        Now imagine that same mechanism in systems where the stakes aren&apos;t an embarrassing email.
-        Medical diagnosis. Criminal sentencing. Military targeting. The speed that makes AI useful
-        is the same speed that makes it dangerous.
+        But it does show why we need to be thoughtful about risk when using AI. A routine internal
+        report — the kind I&apos;ve written hundreds of — nearly triggered an unnecessary escalation
+        because AI-generated content was plausible enough to pass a first read.
       </p>
       <p>
-        We got lucky. The correction came in time. The customer never felt a thing. But luck is not
-        a strategy, and &ldquo;we caught it this time&rdquo; is not a safety case.
+        Now imagine that same dynamic in systems where there aren&apos;t ten years of institutional
+        muscle memory to catch mistakes. Medical diagnosis. Criminal sentencing. Military targeting.
+        The speed that makes AI useful is the same speed that demands we keep humans in the loop.
       </p>
 
       <SectionHeader tag="speed-is-the-product" title="Speed Is the Product" />
@@ -105,9 +109,9 @@ export default function MoveFast() {
         the generation speed.
       </p>
       <p>
-        The fire drill at Amazon was contained. It was internal. It was embarrassing but not
-        consequential. It was also a preview. Not of what AI does wrong — but of what happens when
-        humans trust it at speed.
+        My team&apos;s fire drill was contained because Amazon&apos;s process caught it — the way it&apos;s
+        designed to. But it was also a reminder. Not of what AI does wrong — but of why we need to
+        stay thoughtful about how we trust it at speed.
       </p>
 
       <PageNav

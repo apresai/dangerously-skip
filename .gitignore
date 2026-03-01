@@ -29,6 +29,7 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
+.env
 .env*.local
 
 # vercel
@@ -40,4 +41,8 @@ next-env.d.ts
 
 # cdk
 cdk/cdk.out/
+cdk/cdk.context.json
 cdk/node_modules/
+
+# open-next
+.open-next/
