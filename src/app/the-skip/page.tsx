@@ -1,5 +1,7 @@
 import { ArticleLayout } from "@/components/article-layout";
 import { SectionHeader } from "@/components/section-header";
+import { Pullquote } from "@/components/pullquote";
+import { AnimateIn } from "@/components/animate-in";
 import { SkipPrompt } from "@/components/skip-prompt";
 import { PageNav } from "@/components/page-nav";
 
@@ -13,6 +15,9 @@ export default function TheSkip() {
     <ArticleLayout>
       <span className="font-mono text-xs text-terminal-dim block mb-4">
         Read(&quot;the-skip&quot;)
+      </span>
+      <span className="font-mono text-xs text-terminal-dim block mb-1">
+        {"//"} article 2 of 4 · 2 min read
       </span>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">
         The Skip
@@ -53,6 +58,12 @@ export default function TheSkip() {
         That feeling — that impatience with safety you&apos;ve outgrown — is the most dangerous
         feeling in technology. It&apos;s the feeling right before the mistake.
       </p>
+
+      <AnimateIn>
+        <Pullquote variant="amber">
+          That impatience with safety you&apos;ve outgrown — that&apos;s the feeling right before the mistake.
+        </Pullquote>
+      </AnimateIn>
 
       <SectionHeader tag="the-flag" title="The Flag" />
       <p>
@@ -108,6 +119,12 @@ export default function TheSkip() {
         the danger. You can put it in bold. You can make people type it out letter by letter. And
         they&apos;ll still do it, because the speed is too good to give up.
       </p>
+
+      <AnimateIn>
+        <Pullquote>
+          You can name the danger. You can put it in bold. And they&apos;ll still do it, because the speed is too good to give up.
+        </Pullquote>
+      </AnimateIn>
 
       <SkipPrompt />
 

@@ -9,6 +9,7 @@ const nav = [
   { href: "/the-skip", label: "the skip" },
   { href: "/the-anthropic-bet", label: "the anthropic bet" },
   { href: "/surviving-our-adolescence", label: "surviving" },
+  { href: "/podcasts", label: "podcasts" },
 ];
 
 export function SiteHeader() {

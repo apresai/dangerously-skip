@@ -1,5 +1,7 @@
 import { ArticleLayout } from "@/components/article-layout";
 import { SectionHeader } from "@/components/section-header";
+import { Pullquote } from "@/components/pullquote";
+import { AnimateIn } from "@/components/animate-in";
 import { PageNav } from "@/components/page-nav";
 
 export const metadata = {
@@ -12,6 +14,9 @@ export default function MoveFast() {
     <ArticleLayout>
       <span className="font-mono text-xs text-terminal-dim block mb-4">
         Read(&quot;move-fast&quot;)
+      </span>
+      <span className="font-mono text-xs text-terminal-dim block mb-1">
+        {"//"} article 1 of 4 · 2 min read
       </span>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">
         Move Fast
@@ -78,6 +83,12 @@ export default function MoveFast() {
         The speed that makes AI useful is the same speed that demands we keep humans in the loop.
       </p>
 
+      <AnimateIn>
+        <Pullquote>
+          The speed that makes AI useful is the same speed that demands we keep humans in the loop.
+        </Pullquote>
+      </AnimateIn>
+
       <SectionHeader tag="speed-is-the-product" title="Speed Is the Product" />
       <p>
         Here&apos;s the uncomfortable truth: organizations don&apos;t reward caution. They reward velocity.
@@ -90,6 +101,13 @@ export default function MoveFast() {
         performance review that says &ldquo;took an extra two hours to verify AI output, avoided a
         false escalation.&rdquo; The incentives all point one direction: ship it.
       </p>
+
+      <AnimateIn>
+        <Pullquote variant="amber">
+          Nobody gets promoted for the disaster they prevented.
+        </Pullquote>
+      </AnimateIn>
+
       <p>
         And AI is the most powerful shipping tool ever built.
       </p>

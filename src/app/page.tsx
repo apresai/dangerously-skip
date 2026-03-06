@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       {/* Navigation Cards */}
-      <section className="px-6 pb-20">
+      <section className="px-6 pb-16">
         <div className="max-w-4xl mx-auto">
           <div className="font-mono text-xs text-terminal-dim mb-6">
             {"//"} table of contents
@@ -77,6 +77,21 @@ export default function Home() {
               <NavCard key={page.href} {...page} index={i + 1} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Podcasts */}
+      <section className="px-6 pb-20">
+        <div className="max-w-4xl mx-auto">
+          <div className="font-mono text-xs text-terminal-dim mb-6">
+            {"//"} listen
+          </div>
+          <NavCard
+            href="/podcasts"
+            title="Podcasts"
+            hook="Two conversations based on Dario Amodei's essays — on AI's radical upside and humanity's technological adolescence."
+            index={5}
+          />
         </div>
       </section>
     </div>

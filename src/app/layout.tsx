@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { SkipProvider } from "@/components/skip-provider";
+import { ReadingProgress } from "@/components/reading-progress";
 import "./globals.css";
 
 const inter = Inter({
@@ -38,6 +39,7 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
         <SkipProvider>
+          <ReadingProgress />
           <div className="min-h-screen flex flex-col">
             <SiteHeader />
             <main className="flex-1">{children}</main>

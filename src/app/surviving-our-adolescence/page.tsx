@@ -1,6 +1,10 @@
 import { ArticleLayout } from "@/components/article-layout";
 import { SectionHeader } from "@/components/section-header";
+import { Pullquote } from "@/components/pullquote";
+import { ConceptBox } from "@/components/concept-box";
+import { AnimateIn } from "@/components/animate-in";
 import { RequiredReading } from "@/components/required-reading";
+import { DoctorStory } from "@/components/doctor-story";
 import { FinalPrompt } from "@/components/final-prompt";
 import { PageNav } from "@/components/page-nav";
 
@@ -14,6 +18,9 @@ export default function SurvivingOurAdolescence() {
     <ArticleLayout>
       <span className="font-mono text-xs text-terminal-dim block mb-4">
         Read(&quot;surviving-our-adolescence&quot;)
+      </span>
+      <span className="font-mono text-xs text-terminal-dim block mb-1">
+        {"//"} article 4 of 4 · 4 min read
       </span>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">
         Surviving Our Adolescence
@@ -41,6 +48,12 @@ export default function SurvivingOurAdolescence() {
         our century.
       </p>
 
+      <AnimateIn>
+        <Pullquote>
+          How did you do it? How did you survive your adolescence?
+        </Pullquote>
+      </AnimateIn>
+
       <SectionHeader tag="darios-answer" title="Dario's Answer" />
       <p>
         Anthropic&apos;s CEO wrote an essay with that exact framing.{" "}
@@ -66,6 +79,8 @@ export default function SurvivingOurAdolescence() {
         Most CEOs publish essays about opportunity. Dario published one about existential risk. And
         then went back to work building the safety systems to mitigate it.
       </p>
+
+      <DoctorStory />
 
       <SectionHeader tag="the-skip-is-the-test" title="The Skip Is the Test" />
       <p>
@@ -98,6 +113,15 @@ export default function SurvivingOurAdolescence() {
         most companies lack: the willingness to stop if the safety case isn&apos;t there. That&apos;s not
         timidity. That&apos;s the kind of discipline that gets civilizations through adolescence.
       </p>
+
+      <AnimateIn>
+        <ConceptBox title="the-safety-stack" command="ls -la safety/">
+          <p className="mb-1"><span className="text-terminal-green">constitutional-ai/</span> — Principles over prohibitions</p>
+          <p className="mb-1"><span className="text-terminal-green">interpretability/</span> — Understanding why, not just what</p>
+          <p><span className="text-terminal-green">responsible-scaling-policy/</span> — Red lines drawn in advance</p>
+        </ConceptBox>
+      </AnimateIn>
+
       <p>
         And it&apos;s the same discipline I abandoned when I typed{" "}
         <code>--dangerously-skip-permissions</code>. The discipline to let the check run. To read the
@@ -132,6 +156,12 @@ export default function SurvivingOurAdolescence() {
       <p>
         When that check comes, I want the people who never learned to skip in charge.
       </p>
+
+      <AnimateIn>
+        <Pullquote variant="green">
+          When that check comes, I want the people who never learned to skip in charge.
+        </Pullquote>
+      </AnimateIn>
 
       <FinalPrompt />
 

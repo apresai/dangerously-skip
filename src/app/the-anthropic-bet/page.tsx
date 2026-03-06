@@ -1,5 +1,8 @@
 import { ArticleLayout } from "@/components/article-layout";
 import { SectionHeader } from "@/components/section-header";
+import { Pullquote } from "@/components/pullquote";
+import { ConceptBox } from "@/components/concept-box";
+import { AnimateIn } from "@/components/animate-in";
 import { PageNav } from "@/components/page-nav";
 
 export const metadata = {
@@ -12,6 +15,9 @@ export default function TheAnthropicBet() {
     <ArticleLayout>
       <span className="font-mono text-xs text-terminal-dim block mb-4">
         Read(&quot;the-anthropic-bet&quot;)
+      </span>
+      <span className="font-mono text-xs text-terminal-dim block mb-1">
+        {"//"} article 3 of 4 · 2 min read
       </span>
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-2">
         The Anthropic Bet
@@ -44,11 +50,25 @@ export default function TheAnthropicBet() {
         the model on principles, not just prohibitions. The difference between a fence and a
         conscience. A fence keeps you in. A conscience helps you decide where to go.
       </p>
+
+      <AnimateIn>
+        <Pullquote variant="green">
+          The difference between a fence and a conscience. A fence keeps you in. A conscience helps you decide where to go.
+        </Pullquote>
+      </AnimateIn>
+
       <p>
         It&apos;s the difference between a system that won&apos;t help you because it&apos;s been told not to,
         and a system that understands <em>why</em> it shouldn&apos;t. One breaks when you find the right
         prompt. The other adapts because it actually gets it.
       </p>
+
+      <AnimateIn>
+        <ConceptBox title="constitutional-ai" command="cat constitutional-ai.md">
+          <p className="mb-2">Not guardrails. Not a blocklist. <span className="text-terminal-green">Principles</span> over prohibitions.</p>
+          <p>Train the model to understand <span className="text-terminal-green">why</span>, not just <span className="text-terminal-green">what</span>. Judgment that adapts to novel situations instead of breaking at the first creative prompt.</p>
+        </ConceptBox>
+      </AnimateIn>
 
       <SectionHeader tag="responsible-scaling" title="The Responsible Scaling Policy" />
       <p>
@@ -66,6 +86,13 @@ export default function TheAnthropicBet() {
         well, too fast, without enough understanding. In the history of technology companies, how
         often has anyone voluntarily slowed down at the moment of their greatest acceleration?
       </p>
+
+      <AnimateIn>
+        <ConceptBox title="responsible-scaling-policy" command="cat rsp.md">
+          <p className="mb-2"><span className="text-terminal-green">AI Safety Levels</span> — capability thresholds that trigger mandatory evaluations.</p>
+          <p>Before deploying more capable models, prove the safety case first. Self-imposed red lines published <span className="text-terminal-green">before</span> the capability exists to cross them.</p>
+        </ConceptBox>
+      </AnimateIn>
 
       <SectionHeader tag="safety-is-engineering" title="Safety Is Not a Brake, It's Engineering" />
       <p>
@@ -95,7 +122,17 @@ export default function TheAnthropicBet() {
         <code>--dangerously-skip</code> safety checks on automated weapons systems.
       </p>
       <p>
-        There is no undo on a missile. There is no &ldquo;sorry, that wasn&apos;t accurate&rdquo; email after an
+        There is no undo on a missile.
+      </p>
+
+      <AnimateIn>
+        <Pullquote variant="amber">
+          There is no undo on a missile.
+        </Pullquote>
+      </AnimateIn>
+
+      <p>
+        There is no &ldquo;sorry, that wasn&apos;t accurate&rdquo; email after an
         autonomous strike. The stakes are absolute, and the safety must be absolute too. The same
         instinct that made me type <code>--dangerously-skip-permissions</code> on a side project would
         be catastrophic in a weapons system. The speed feels the same. The consequences don&apos;t.
