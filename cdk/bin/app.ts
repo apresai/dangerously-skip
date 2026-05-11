@@ -13,3 +13,8 @@ const env = {
 
 new DangerouslySkipStack(app, "DangerouslySkipStack", { env });
 new GitHubOidcStack(app, "GitHubOidcStack", { env });
+
+cdk.Tags.of(app).add("project", "dangerously-skip");
+cdk.Tags.of(app).add("env", "prod");
+cdk.Tags.of(app).add("managed-by", "cdk");
+cdk.Tags.of(app).add("owner", "chad");
