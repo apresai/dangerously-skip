@@ -8,11 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `make build` — production build (`npm run build`)
 - `make clean` — remove .next, out, node_modules
 - `make deploy` — clean → install → build → CDK deploy
-- `npm run lint` — ESLint v9 flat config with next/core-web-vitals
+- `npm run lint` — `eslint .` (ESLint v9 flat config: `eslint-config-next` core-web-vitals + typescript)
 
 ## Tech Stack
 
-- Next.js 15 + React 19 + TypeScript (strict) + Tailwind CSS v4
+- Next.js 16 + React 19 + TypeScript (strict) + Tailwind CSS v4
 - App Router with static prerendering (all pages are `○ Static`)
 - Path alias: `@/*` → `./src/*`
 - Fonts: Inter (sans) + JetBrains Mono (mono) via next/font/google
@@ -48,7 +48,7 @@ To add a new article: create `src/app/{slug}/page.tsx`, export metadata, use `Ar
 
 ## Deployment
 
-Target: `dangerously-skip-permissions.apresai.dev` via OpenNext → Lambda + CloudFront (CDK stack not yet built).
+Target: `dangerously-skip-permissions.apresai.dev` via OpenNext → Lambda + CloudFront. Infra lives in `cdk/` (the `cdk-opennext` `NextjsSite` construct); deploy with `make deploy` or the GitHub Actions workflow on push to `main`.
 
 ## JSX Gotcha
 
