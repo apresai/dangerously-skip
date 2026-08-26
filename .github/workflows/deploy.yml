@@ -23,7 +23,12 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-      - run: npx open-next build
+      # NPM_CONFIG_USERCONFIG=/dev/null keeps the inner `npm install` that
+      # OpenNext runs for the image optimization bundle from picking up a user
+      # npmrc. It is a no-op on this runner today (setup-node writes no auth
+      # npmrc without registry-url) and is kept so CI and `make deploy` run the
+      # exact same command.
+      - run: NPM_CONFIG_USERCONFIG=/dev/null npx open-next build
       - working-directory: cdk
         run: npm ci
       - uses: aws-actions/configure-aws-credentials@v6
