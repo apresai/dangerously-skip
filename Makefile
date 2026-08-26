@@ -22,7 +22,7 @@ deploy: clean
 #
 # Spell both vars in npm's own LOWERCASE env form. npm matches /^npm_config_/i
 # and resolves duplicates by environ order, not by case, so an uppercase
-# NPM_CONFIG_USERCONFIG does not override an inherited lowercase one -- it adds a
+# NPM_CONFIG_USERCONFIG does not override an inherited lowercase one; it adds a
 # SECOND entry and loses the race. Matching npm's spelling replaces the entry
 # instead. A make recipe inherits no npm_config_*, so uppercase happened to work
 # here, but it is silently inert inside an npm script; using npm's spelling costs
@@ -31,7 +31,7 @@ deploy: clean
 # installDeps.js catches a failed inner install, logs "Could not install
 # dependencies" and returns, so `open-next build` exits 0 and the bundle ships
 # with no sharp. Assert the result so the next regression is loud rather than
-# silent.
-	@test -f .open-next/image-optimization-function/node_modules/@img/sharp-linux-arm64/lib/sharp-linux-arm64.node \
-		|| { echo "FATAL: image-optimization bundle has no linux-arm64 sharp; the inner npm install failed silently"; exit 1; }
+# silent. The script also checks the binary is a real arm64 ELF and that sharp
+# is at or above the version floor; see its header.
+	@node scripts/assert-sharp-bundle.mjs .open-next/image-optimization-function
 	cd cdk && npm install && npx cdk deploy --all --require-approval never

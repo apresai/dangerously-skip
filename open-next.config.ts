@@ -38,7 +38,7 @@ const config: OpenNextConfig = {
   // Same pattern as regist/web, podcaster/portal and eleven9s/admin.
   imageOptimization: {
     install: {
-      packages: ["sharp@0.34.5"],
+      packages: ["sharp@0.35.3"],
       os: "linux",
       libc: "glibc",
       additionalArgs: "--cpu=arm64",

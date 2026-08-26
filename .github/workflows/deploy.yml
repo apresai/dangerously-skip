@@ -35,8 +35,12 @@ jobs:
       # produces the wrong binary.
       - run: npm_config_userconfig=/dev/null npm_config_allow_scripts= npx open-next build
       # installDeps.js swallows a failed inner install, so open-next build exits
-      # 0 with a sharp-less bundle. Fail loudly instead of deploying that.
-      - run: test -f .open-next/image-optimization-function/node_modules/@img/sharp-linux-arm64/lib/sharp-linux-arm64.node
+      # 0 with a sharp-less bundle. Fail loudly instead of deploying that. This
+      # matters more on CI than locally: ubuntu-latest is x64, so a regression in
+      # the --cpu=arm64 override would produce an x64 binary here that a
+      # developer's Apple Silicon build would never reproduce. The script checks
+      # the ELF machine type, not just that a file exists.
+      - run: node scripts/assert-sharp-bundle.mjs .open-next/image-optimization-function
       - working-directory: cdk
         run: npm ci
       - uses: aws-actions/configure-aws-credentials@v6
