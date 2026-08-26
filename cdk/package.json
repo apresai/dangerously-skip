@@ -10,7 +10,7 @@
     "diff": "cdk diff"
   },
   "dependencies": {
-    "aws-cdk-lib": "^2.259.0",
+    "aws-cdk-lib": "^2.265.0",
     "cdk-opennext": "^0.5.8",
     "constructs": "^10.6.0"
   },
