@@ -23,7 +23,24 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build
-      - run: npx open-next build
+      # The npm_config_userconfig guard keeps the inner `npm install` that
+      # OpenNext runs for the image optimization bundle from picking up a user
+      # npmrc. It is a no-op on this runner today (setup-node writes no auth
+      # npmrc without registry-url) and is kept so CI and `make deploy` run the
+      # exact same command. Lowercase deliberately: see the note in the Makefile.
+      #
+      # The load-bearing half of this fix on CI is open-next.config.ts, not the
+      # prefix: ubuntu-latest is x64, npm defaults --cpu to the host, and the
+      # image optimizer Lambda is ARM_64, so without --cpu=arm64 a CI build
+      # produces the wrong binary.
+      - run: npm_config_userconfig=/dev/null npm_config_allow_scripts= npx open-next build
+      # installDeps.js swallows a failed inner install, so open-next build exits
+      # 0 with a sharp-less bundle. Fail loudly instead of deploying that. This
+      # matters more on CI than locally: ubuntu-latest is x64, so a regression in
+      # the --cpu=arm64 override would produce an x64 binary here that a
+      # developer's Apple Silicon build would never reproduce. The script checks
+      # the ELF machine type, not just that a file exists.
+      - run: node scripts/assert-sharp-bundle.mjs .open-next/image-optimization-function
       - working-directory: cdk
         run: npm ci
       - uses: aws-actions/configure-aws-credentials@v6
