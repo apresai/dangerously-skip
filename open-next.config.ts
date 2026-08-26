@@ -8,7 +8,8 @@ const config: OpenNextConfig = {
   // sharp at all, and the build still exits 0 while that happens.
   //
   // Why: OpenNext's dist/build/installDeps.js builds its inner install command
-  // as `npm install --os=<os> --arch=<arch> --target=<nodeVersion> --libc=<libc> <packages>`.
+  // as `npm install --os=<os> --arch=<arch> --target=<nodeVersion>
+  // --libc=<libc> <packages>`.
   // `--arch` and `--target` have never been real npm flags (npm's equivalent of
   // the first is `--cpu`, and it has no equivalent of the second). Older npm
   // ignored unknown flags silently; npm 12 rejects them with EUNKNOWNCONFIG, so
@@ -30,10 +31,19 @@ const config: OpenNextConfig = {
   // (x64) and would silently produce an x64 sharp. cdk-opennext pins every
   // function to Architecture.ARM_64, so the target is always arm64.
   //
-  // sharp is pinned explicitly because OpenNext's default is 0.32.6, which
-  // predates the prebuilt @img/* packages and needs a postinstall script that
-  // npm 12 blocks. 0.34.5 is what this repo's lockfile already resolves for
-  // next's own optional sharp dependency.
+  // sharp is pinned to 0.35.3 for two reasons. The floor is a SECURITY floor:
+  // everything below 0.35.0 carries GHSA-f88m-g3jw-g9cj (HIGH), sharp
+  // inheriting libvips CVE-2026-33327 / -33328 / -35590 / -35591. And
+  // OpenNext's default
+  // 0.32.6 predates the prebuilt @img/* packages, relying on an install script
+  // that npm 12 blocks, where that script IS how its binary arrives, so
+  // blocking
+  // it leaves nothing behind. 0.35.x declares no install script at all.
+  //
+  // This is independent of whatever next's own optional sharp dependency
+  // resolves to in the lockfile: OpenNext installs into its own temp dir, where
+  // this repo's resolutions do not apply, so this line is the only thing
+  // deciding what the image Lambda ships.
   //
   // Same pattern as regist/web, podcaster/portal and eleven9s/admin.
   imageOptimization: {

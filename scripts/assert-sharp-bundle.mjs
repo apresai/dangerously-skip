@@ -15,13 +15,18 @@
 //   1. The native binary is present. Globbed, not named: sharp 0.35 renamed it
 //      from sharp-linux-arm64.node to sharp-linux-arm64-<version>.node, so a
 //      hardcoded filename silently becomes a false failure on the next bump.
-//   2. It is really an arm64 ELF. npm defaults --cpu to the BUILD HOST, so an
-//      x86 CI runner would otherwise produce an x64 binary for an ARM64 Lambda
-//      and every check above would still pass.
+//      This is also the check that catches a wrong --cpu. The @img/* packages
+//      are cpu-gated optionalDependencies, so an x86 build host without
+//      --cpu=arm64 resolves @img/sharp-linux-x64 and the arm64 directory this
+//      script looks for simply does not exist.
+//   2. It is really an arm64 ELF. Note this does NOT catch the wrong-host case
+//      above, which never gets this far; it covers the narrower case of a
+//      corrupted or substituted binary inside a correctly named package, and
+//      guards the assumption that the directory name implies the architecture.
 //   3. sharp is >= 0.35.0. Everything below carries GHSA-f88m-g3jw-g9cj (HIGH,
-//      inherited libvips CVE-2026-33327 / -33328 / -35590). The app's own
-//      package.json override does NOT reach this install, because OpenNext runs
-//      npm in its own temp dir, so nothing else stops a downgrade here.
+//      inherited libvips CVE-2026-33327 / -33328 / -35590 / -35591). The app's
+//      own package.json override does NOT reach this install, because OpenNext
+//      runs npm in its own temp dir, so nothing else stops a downgrade here.
 import { existsSync, readdirSync, readFileSync, openSync, readSync, closeSync } from "node:fs";
 
 const MIN_MAJOR = 0;
@@ -78,7 +83,11 @@ for (const bundle of bundles) {
   for (const bin of binaries) {
     const arch = elfArch(`${libDir}/${bin}`);
     if (arch !== "arm64") {
-      fail(`${bundle}/${bin} is ${arch}, not arm64. npm resolved --cpu to the build host.`);
+      fail(
+        `${bundle}/${bin} is ${arch}, not arm64, inside an arm64-named package. ` +
+          `That means a corrupted or substituted binary, not a wrong --cpu: a ` +
+          `wrong --cpu would have failed the check above instead.`,
+      );
       bundleOk = false;
     }
   }
