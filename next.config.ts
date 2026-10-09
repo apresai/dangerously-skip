@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Stops FileSystemCache writes to read-only /var/task on Lambda (OpenNext #1232).
+  experimental: {
+    isrFlushToDisk: false,
+  },
   // Pin the workspace root so Turbopack file tracing is deterministic.
   // This repo is developed in git worktrees, so multiple lockfiles
   // (canonical clone + worktree) always coexist; without this, Next 16
