@@ -101,11 +101,21 @@ for (const bundle of bundles) {
   }
 
   const version = JSON.parse(readFileSync(pkgJson, "utf8")).version;
-  const [major, minor, patch] = version.split(".").map(Number);
+  // Parse strictly: a plain split(".") turns "0.35.5-rc.1" into a NaN patch,
+  // and every comparison against NaN is false, so the floor would pass.
+  const parsed = /^(\d+)\.(\d+)\.(\d+)(-.+)?$/.exec(version);
+  if (!parsed) {
+    fail(`${bundle} has an unparseable sharp version ${version}`);
+    continue;
+  }
+  const [major, minor, patch] = parsed.slice(1, 4).map(Number);
+  const prerelease = parsed[4] !== undefined;
+  // A prerelease sorts below its release (semver), so 0.35.5-rc.1 is below 0.35.5.
   const belowFloor =
     major < MIN_MAJOR ||
     (major === MIN_MAJOR && minor < MIN_MINOR) ||
-    (major === MIN_MAJOR && minor === MIN_MINOR && patch < MIN_PATCH);
+    (major === MIN_MAJOR && minor === MIN_MINOR && patch < MIN_PATCH) ||
+    (major === MIN_MAJOR && minor === MIN_MINOR && patch === MIN_PATCH && prerelease);
   if (belowFloor) {
     fail(
       `${bundle} has sharp ${version}; anything below ${MIN_MAJOR}.${MIN_MINOR}.${MIN_PATCH} ` +
