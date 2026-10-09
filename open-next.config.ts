@@ -31,8 +31,9 @@ const config: OpenNextConfig = {
   // (x64) and would silently produce an x64 sharp. cdk-opennext pins every
   // function to Architecture.ARM_64, so the target is always arm64.
   //
-  // sharp is pinned to 0.35.3 for two reasons. The floor is a SECURITY floor:
-  // everything below 0.35.0 carries GHSA-f88m-g3jw-g9cj (HIGH), sharp
+  // sharp is pinned to 0.35.5 for two reasons. The floor is a SECURITY floor:
+  // 0.35.4 and below carry GHSA-wq5f-xc86-pv6w (HIGH, librsvg CVE-2026-96889).
+  // Everything below 0.35.0 also carries GHSA-f88m-g3jw-g9cj (HIGH), sharp
   // inheriting libvips CVE-2026-33327 / -33328 / -35590 / -35591. And
   // OpenNext's default
   // 0.32.6 predates the prebuilt @img/* packages, relying on an install script
@@ -48,7 +49,7 @@ const config: OpenNextConfig = {
   // Same pattern as regist/web, podcaster/portal and eleven9s/admin.
   imageOptimization: {
     install: {
-      packages: ["sharp@0.35.3"],
+      packages: ["sharp@0.35.5"],
       os: "linux",
       libc: "glibc",
       additionalArgs: "--cpu=arm64",

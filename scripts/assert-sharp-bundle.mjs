@@ -23,15 +23,18 @@
 //      above, which never gets this far; it covers the narrower case of a
 //      corrupted or substituted binary inside a correctly named package, and
 //      guards the assumption that the directory name implies the architecture.
-//   3. sharp is >= 0.35.0. Everything below carries GHSA-f88m-g3jw-g9cj (HIGH,
-//      inherited libvips CVE-2026-33327 / -33328 / -35590 / -35591). The app's
-//      own package.json override does NOT reach this install, because OpenNext
-//      runs npm in its own temp dir, so nothing else stops a downgrade here.
+//   3. sharp is >= 0.35.5. 0.35.4 and below carry GHSA-wq5f-xc86-pv6w (HIGH,
+//      librsvg CVE-2026-96889). Everything below 0.35.0 also carries
+//      GHSA-f88m-g3jw-g9cj (HIGH, inherited libvips CVE-2026-33327 / -33328 /
+//      -35590 / -35591). The app's own package.json override does NOT reach
+//      this install, because OpenNext runs npm in its own temp dir, so nothing
+//      else stops a downgrade here.
 import { existsSync, readdirSync, readFileSync, openSync, readSync, closeSync } from "node:fs";
 
 const MIN_MAJOR = 0;
 const MIN_MINOR = 35;
-const ADVISORY = "GHSA-f88m-g3jw-g9cj";
+const MIN_PATCH = 5;
+const ADVISORY = "GHSA-wq5f-xc86-pv6w";
 
 const bundles = process.argv.slice(2);
 if (bundles.length === 0) {
@@ -98,10 +101,14 @@ for (const bundle of bundles) {
   }
 
   const version = JSON.parse(readFileSync(pkgJson, "utf8")).version;
-  const [major, minor] = version.split(".").map(Number);
-  if (major < MIN_MAJOR || (major === MIN_MAJOR && minor < MIN_MINOR)) {
+  const [major, minor, patch] = version.split(".").map(Number);
+  const belowFloor =
+    major < MIN_MAJOR ||
+    (major === MIN_MAJOR && minor < MIN_MINOR) ||
+    (major === MIN_MAJOR && minor === MIN_MINOR && patch < MIN_PATCH);
+  if (belowFloor) {
     fail(
-      `${bundle} has sharp ${version}; anything below ${MIN_MAJOR}.${MIN_MINOR}.0 ` +
+      `${bundle} has sharp ${version}; anything below ${MIN_MAJOR}.${MIN_MINOR}.${MIN_PATCH} ` +
         `carries ${ADVISORY}. The open-next.config.ts install override is the only ` +
         `thing that sets this; package.json overrides do not reach it.`,
     );
