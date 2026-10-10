@@ -16,7 +16,8 @@ const config: OpenNextConfig = {
   // the install dies. installDependencies() catches that, logs "Could not
   // install dependencies", and swallows it, so the bundle ships with no sharp
   // and the build still reports success. This is present in every published
-  // @opennextjs/aws from 3.5.0 through 4.1.1, so upgrading is not a fix.
+  // @opennextjs/aws from 3.5.0 through 4.1.8 (rechecked 2026-10-09 against
+  // 4.1.8's installDeps.js), so upgrading is not a fix.
   //
   // The override omits `arch` and `nodeVersion` (those two fields are what emit
   // the rejected flags) and passes npm's real flag via `additionalArgs`.
