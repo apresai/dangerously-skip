@@ -1,0 +1,16 @@
+# Vulnerability scan exceptions for osv-scanner. osv-scanner reads this file
+# only from the directory of the lockfile it scans, so it sits next to
+# package-lock.json, not at the repository root.
+#
+# Only advisories with NO fixed release belong here. Each entry says why it
+# cannot be actioned and expires, so the exception resurfaces on its own.
+
+[[IgnoredVulns]]
+id = "GHSA-vfj7-8cjw-p6xm"
+ignoreUntil = 2027-01-11T00:00:00Z
+reason = """
+braces 3.0.3 has no fixed release (OSV lists the fixed version as "--"). It is
+a dev-only transitive dependency of the build and lint tooling and is never
+bundled into a deployed Lambda. Accepted until a patched release ships; bump it
+then and delete this entry. Re-evaluate at the ignoreUntil date regardless.
+"""
