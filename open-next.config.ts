@@ -3,6 +3,11 @@ import type { OpenNextConfig } from "@opennextjs/aws/types/open-next";
 const config: OpenNextConfig = {
   default: {},
 
+  // No tag or path revalidation in this app (a pure static content site), so skip
+  // the DynamoDB tag cache and its custom resources. See
+  // cdk/test/no-revalidation.test.ts, which fails if app source starts using it.
+  dangerous: { disableTagCache: true },
+
   // Do not delete this block, and do not "simplify" it back to OpenNext's
   // defaults. Without it the deployed image optimization Lambda ships with no
   // sharp at all, and the build still exits 0 while that happens.

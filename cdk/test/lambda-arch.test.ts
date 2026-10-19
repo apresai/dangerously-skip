@@ -45,3 +45,22 @@ for (const stack of stacks) {
     });
   }
 }
+
+// open-next.config.ts sets dangerous.disableTagCache, so cdk-opennext must not
+// create the DynamoDB tag-cache table or the custom resources that seed it.
+test("DangerouslySkipStack: no revalidation table, insert function or provider", () => {
+  const stack = stacks.find((s) => s.stackName === "DangerouslySkipStack");
+  assert.ok(stack, "DangerouslySkipStack not found");
+  const template = Template.fromStack(stack);
+
+  // TableV2 synthesizes AWS::DynamoDB::GlobalTable, so check both types.
+  template.resourceCountIs("AWS::DynamoDB::Table", 0);
+  template.resourceCountIs("AWS::DynamoDB::GlobalTable", 0);
+  const ids = Object.keys(template.toJSON().Resources as object);
+  const found = ids.filter((id) =>
+    /RevalidationTable|RevalidationInsertFunction|RevalidationProvider|RevalidationResource/.test(
+      id,
+    ),
+  );
+  assert.deepEqual(found, []);
+});
