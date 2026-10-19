@@ -53,7 +53,9 @@ test("DangerouslySkipStack: no revalidation table, insert function or provider",
   assert.ok(stack, "DangerouslySkipStack not found");
   const template = Template.fromStack(stack);
 
+  // TableV2 synthesizes AWS::DynamoDB::GlobalTable, so check both types.
   template.resourceCountIs("AWS::DynamoDB::Table", 0);
+  template.resourceCountIs("AWS::DynamoDB::GlobalTable", 0);
   const ids = Object.keys(template.toJSON().Resources as object);
   const found = ids.filter((id) =>
     /RevalidationTable|RevalidationInsertFunction|RevalidationProvider|RevalidationResource/.test(
